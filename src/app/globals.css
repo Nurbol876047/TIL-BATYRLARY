@@ -20,3 +20,33 @@ html, body, #__next {
   color: var(--foreground);
   font-family: system-ui, -apple-system, sans-serif;
 }
+
+/* Пылинки, взлетающие вверх — квест «Толағай» (components/tolagai/RockShard.tsx) */
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-26px) scale(0.4); opacity: 0; }
+}
+
+/* Задание «Батыр — қасиеті» (components/tausogar/MatchTask.tsx, hooks/tausogar/usePinchDrag.ts) */
+.tausogar-card-dragging {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+}
+.tausogar-zone-hover {
+  border-color: #8fd9ff !important;
+  box-shadow: 0 0 0 3px rgba(143, 217, 255, 0.35);
+}
+.tausogar-cursor.tausogar-cursor-pinching {
+  background-color: rgba(143, 217, 255, 0.55);
+  border-color: #8fd9ff;
+}
+@keyframes tausogar-shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-8px, 0, 0); }
+  40% { transform: translate3d(8px, 0, 0); }
+  60% { transform: translate3d(-6px, 0, 0); }
+  80% { transform: translate3d(6px, 0, 0); }
+}
+.tausogar-card-shake {
+  animation: tausogar-shake 0.42s ease-in-out;
+}

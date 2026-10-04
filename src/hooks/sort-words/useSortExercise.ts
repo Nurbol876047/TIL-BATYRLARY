@@ -18,7 +18,7 @@ const TICK_MS = 250;
  * колбэк интеграции. Логика проверки — в сторе (sortWord), она же
  * используется мобильным 2D-режимом.
  */
-export function useSortExercise(onExerciseComplete?: SortCompleteHandler) {
+export function useSortExercise(onExerciseComplete?: SortCompleteHandler, initialSetId?: string) {
   const activeSet = useSortWordsStore((s) => s.activeSet);
   const roundState = useSortWordsStore((s) => s.roundState);
   const score = useSortWordsStore((s) => s.score);
@@ -36,9 +36,11 @@ export function useSortExercise(onExerciseComplete?: SortCompleteHandler) {
     onCompleteRef.current = onExerciseComplete;
   }, [onExerciseComplete]);
 
-  // первый раунд
+  // первый раунд — если указан initialSetId (например, тематический квест
+  // про конкретного героя), стартуем именно с него, а не со случайного
   useEffect(() => {
-    if (useSortWordsStore.getState().roundState === 'idle') startRound();
+    if (useSortWordsStore.getState().roundState === 'idle') startRound(initialSetId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startRound]);
 
   // таймер

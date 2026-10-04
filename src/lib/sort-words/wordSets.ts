@@ -8,7 +8,7 @@
  * умеет принимать два ответа.
  */
 
-export type SetKind = 'grammar' | 'vocabulary';
+export type SetKind = 'grammar' | 'vocabulary' | 'culture';
 
 /** Цвета корзин — совпадают с потоками на видеофоне (sky / violet / emerald) */
 export type BasketColor = 'sky' | 'violet' | 'emerald';
@@ -95,6 +95,33 @@ export const WORD_SETS: readonly WordSet[] = [
       w('morning', 'time', 'таң'), w('afternoon', 'time', 'түстен кейін'), w('evening', 'time', 'кеш'), w('night', 'time', 'түн'), w('noon', 'time', 'түс'),
       w('Monday', 'days', 'дүйсенбі'), w('Wednesday', 'days', 'сәрсенбі'), w('Thursday', 'days', 'бейсенбі'), w('Saturday', 'days', 'сенбі'), w('Sunday', 'days', 'жексенбі'),
       w('one', 'numbers', 'бір'), w('two', 'numbers', 'екі'), w('seven', 'numbers', 'жеті'), w('ten', 'numbers', 'он'), w('twelve', 'numbers', 'он екі'),
+    ],
+  },
+  // Квест по казахской сказке «Ер-Төстік»: герой Желаяқ. Три корзины — факт
+  // про самого Желаяка, факт-ловушка про другого батыра той же сказки и
+  // выдуманное утверждение. Сложность — в похожих по звучанию, но неверных
+  // вариантах, чтобы игрок действительно вспоминал сюжет, а не угадывал.
+  {
+    id: 'zhelayak-legend',
+    title: 'Желаяқ — Ер-Төстік ертегісі',
+    kind: 'culture',
+    categories: [c('zhelayak', 'Желаяқ туралы', 'sky'), c('other-hero', 'Басқа батыр', 'violet'), c('fiction', 'Жалған', 'emerald')],
+    words: [
+      w('Желаяқ — ең жылдам жүгіруші.', 'zhelayak', 'Zhelayak is the fastest runner.'),
+      w('Желаяқ Ер-Төстікке көмектеседі.', 'zhelayak', 'Zhelayak helps Er-Tostik.'),
+      w('Желаяқ су әкелу үшін жүгіреді.', 'zhelayak', 'Zhelayak runs to fetch water.'),
+      w('Желаяқ жарыс кезінде ұйықтап қалады.', 'zhelayak', 'Zhelayak falls asleep in the race.'),
+      w('Оның аты «жел аяқты» дегенді білдіреді.', 'zhelayak', 'His name means "wind-footed".'),
+      w('Алпамыс күшімен әйгілі.', 'other-hero', 'Alpamys is famous for his strength — a different hero.'),
+      w('Қобыланды Тайбурыл атпен жүреді.', 'other-hero', 'Kobylandy rides the horse Taiburyl — a different hero.'),
+      w('Ер-Төстік Айдаһармен шайқасады.', 'other-hero', 'Er-Tostik fights the dragon Aidahar — not Zhelayak.'),
+      w('Тасшайнар тас жей алады.', 'other-hero', 'Tasshaynar can eat stones — a different companion.'),
+      w('Алпамыс жеті жыл ұйықтайды.', 'other-hero', 'Alpamys sleeps for seven years — a different hero.'),
+      w('Желаяқ құс сияқты ұша алады.', 'fiction', 'Zhelayak can fly like a bird — not true, he runs.'),
+      w('Желаяқ желден қорқады.', 'fiction', 'Zhelayak is afraid of the wind — not true, his name means "wind-footed".'),
+      w('Желаяқ Айда тұрады.', 'fiction', 'Zhelayak lives on the Moon — not true.'),
+      w('Желаяқ айдаһарға айналады.', 'fiction', 'Zhelayak turns into a dragon — not true.'),
+      w('Желаяқ су астында мәңгі тыныс алады.', 'fiction', 'Zhelayak breathes underwater forever — not true.'),
     ],
   },
 ];

@@ -3,17 +3,18 @@
 import React from 'react';
 import { useElementStore, type ElementType } from '@/store/elementStore';
 import { useSpeechElementDetector } from '@/hooks/useSpeechElementDetector';
-import { Droplet, Flame, Mountain, Wind, Volume2, AlertCircle } from 'lucide-react';
+import { Ear, Footprints, GlassWater, Mountain, MountainSnow, Flame, Volume2, AlertCircle } from 'lucide-react';
 
 export const HUD = ({ onElementMastered }: { onElementMastered?: (element: string) => void }) => {
   const { streak, masteredElements, activeElement } = useElementStore();
   const { error, suggestion, toggleListening, isListening, playExample } = useSpeechElementDetector(onElementMastered);
 
   const elements: { id: string; icon: React.ReactNode; label: string; accent: string }[] = [
-    { id: 'water', icon: <Droplet className="w-8 h-8 md:w-10 md:h-10" />, label: 'Water', accent: 'hover:border-sky-300/70 hover:shadow-[0_0_28px_rgba(56,189,248,0.35)]' },
-    { id: 'fire', icon: <Flame className="w-8 h-8 md:w-10 md:h-10" />, label: 'Fire', accent: 'hover:border-orange-300/70 hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]' },
-    { id: 'earth', icon: <Mountain className="w-8 h-8 md:w-10 md:h-10" />, label: 'Earth', accent: 'hover:border-emerald-300/70 hover:shadow-[0_0_28px_rgba(52,211,153,0.35)]' },
-    { id: 'wind', icon: <Wind className="w-8 h-8 md:w-10 md:h-10" />, label: 'Wind', accent: 'hover:border-amber-200/70 hover:shadow-[0_0_28px_rgba(252,211,77,0.35)]' },
+    { id: 'water', icon: <Footprints className="w-8 h-8 md:w-10 md:h-10" />, label: 'Zhelayak', accent: 'hover:border-sky-300/70 hover:shadow-[0_0_28px_rgba(56,189,248,0.35)]' },
+    { id: 'fire', icon: <GlassWater className="w-8 h-8 md:w-10 md:h-10" />, label: 'Koltausar', accent: 'hover:border-orange-300/70 hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]' },
+    { id: 'earth', icon: <Ear className="w-8 h-8 md:w-10 md:h-10" />, label: 'Sakkulak', accent: 'hover:border-emerald-300/70 hover:shadow-[0_0_28px_rgba(52,211,153,0.35)]' },
+    { id: 'wind', icon: <Mountain className="w-8 h-8 md:w-10 md:h-10" />, label: 'Tolagai', accent: 'hover:border-amber-200/70 hover:shadow-[0_0_28px_rgba(252,211,77,0.35)]' },
+    { id: 'tausogar', icon: <MountainSnow className="w-8 h-8 md:w-10 md:h-10" />, label: 'Tausogar', accent: 'hover:border-cyan-200/70 hover:shadow-[0_0_28px_rgba(165,243,252,0.35)]' },
   ];
 
   return (
@@ -32,7 +33,7 @@ export const HUD = ({ onElementMastered }: { onElementMastered?: (element: strin
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 text-right flex flex-col items-end shadow-xl">
             <span className="text-white/60 text-sm uppercase tracking-wider">Mastered</span>
             <span className="text-3xl font-bold text-white">
-              {masteredElements.length} / 4
+              {masteredElements.length} / {elements.length}
             </span>
           </div>
         </div>
@@ -81,7 +82,7 @@ export const HUD = ({ onElementMastered }: { onElementMastered?: (element: strin
 
       {/* Bottom HUD: кнопки стихий — крупные, на весь ряд, на мобильных прижаты к низу */}
       <div className="flex flex-col items-center pointer-events-auto mb-2 md:mb-8">
-        <div className="grid grid-cols-4 gap-3 md:gap-5 w-full max-w-sm md:max-w-lg">
+        <div className="grid grid-cols-5 gap-2 md:gap-5 w-full max-w-md md:max-w-2xl">
           {elements.map((el) => {
             const isMastered = masteredElements.includes(el.id) || (el.id === 'wind' && masteredElements.includes('air'));
             const isActive = activeElement === el.id || (el.id === 'wind' && activeElement === 'air');

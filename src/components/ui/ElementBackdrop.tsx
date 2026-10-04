@@ -8,21 +8,23 @@ import { useElementStore } from '@/store/elementStore';
 // VideoBackdrop, когда элемент активируется (кнопкой или голосом), и исчезает
 // сразу по окончании ролика — под ним снова виден обычный фон.
 const ELEMENT_BACKDROPS: Partial<Record<string, string>> = {
-  water: '/videos/element-water-bg.mp4',
-  fire: '/videos/element-fire-bg.mp4',
-  earth: '/videos/element-earth-bg.mp4',
-  wind: '/videos/element-wind-bg.mp4',
-  air: '/videos/element-wind-bg.mp4',
+  water: '/videos/element-zhelayak-bg.mp4',
+  fire: '/videos/element-koltausar-bg.mp4',
+  earth: '/videos/element-sakkulak-bg.mp4',
+  wind: '/videos/element-tolagai-bg.mp4',
+  air: '/videos/element-tolagai-bg.mp4',
+  tausogar: '/videos/element-tausogar-bg.mp4',
 };
 
 // Куда перекидывать сразу после окончания ролика стихии.
 // Стихии без записи здесь просто возвращаются к обычному фону.
 const ELEMENT_ROUTES: Partial<Record<string, string>> = {
-  water: '/exercises/word-order',
-  fire: '/exercises/sort-words',
-  earth: '/exercises/speaking',
-  wind: '/exercises/elemental-match',
-  air: '/exercises/elemental-match',
+  water: '/exercises/zhelayak',
+  fire: '/exercises/koltausar',
+  earth: '/exercises/sakkulak',
+  wind: '/exercises/tolagai',
+  air: '/exercises/tolagai',
+  tausogar: '/exercises/tausogar',
 };
 
 interface Props {

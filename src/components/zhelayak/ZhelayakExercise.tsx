@@ -5,22 +5,21 @@ import { useMediaPipeHands } from '@/hooks/hand/useMediaPipeHands';
 import { useIsMobile } from '@/hooks/hand/useIsMobile';
 import { useSortExercise, type SortCompleteHandler } from '@/hooks/sort-words/useSortExercise';
 import { useSortWordsStore } from '@/store/sortWordsStore';
-import { WORD_SETS } from '@/lib/sort-words/wordSets';
 import { CameraFeedOverlay } from '@/components/hand/CameraFeedOverlay';
 import { FeedbackBanner } from '@/components/hand/FeedbackBanner';
-import { SortWordsScene } from './SortWordsScene';
-import { HUD } from './HUD';
-import { MobileSortWords } from './MobileSortWords';
+import { ZhelayakScene } from './ZhelayakScene';
+import { ZhelayakHUD } from './ZhelayakHUD';
+import { MobileZhelayak } from './MobileZhelayak';
 
 interface Props {
   /** Точка интеграции с общим прогрессом платформы Lingova */
   onExerciseComplete?: SortCompleteHandler;
-  /** Набор, с которого стартует раунд (например, тематический квест про героя) */
-  initialSetId?: string;
 }
 
-function useSharedHud(onExerciseComplete?: SortCompleteHandler, initialSetId?: string) {
-  const ex = useSortExercise(onExerciseComplete, initialSetId);
+const ZHELAYAK_SET_ID = 'zhelayak-legend';
+
+function useSharedHud(onExerciseComplete?: SortCompleteHandler) {
+  const ex = useSortExercise(onExerciseComplete, ZHELAYAK_SET_ID);
   const feedback = useSortWordsStore((s) => s.feedback);
   const clearFeedback = useSortWordsStore((s) => s.clearFeedback);
   const controlMode = useSortWordsStore((s) => s.controlMode);
@@ -29,13 +28,19 @@ function useSharedHud(onExerciseComplete?: SortCompleteHandler, initialSetId?: s
   const bestTimeMs = useSortWordsStore((s) => s.bestTimeMs);
   const hardMode = useSortWordsStore((s) => s.hardMode);
   const setHardMode = useSortWordsStore((s) => s.setHardMode);
-  return { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode };
+  // Прогресс — не по общему банку наборов (он общий с Sort the Words),
+  // а по тому, пройден ли именно этот квест про Желаяка
+  const questMastered = useSortWordsStore((s) => (s.masteredSets.includes(ZHELAYAK_SET_ID) ? 1 : 0));
+  return { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode, questMastered };
 }
 
-function DesktopExercise({ onExerciseComplete, initialSetId }: Props) {
+/** Квест «Желаяқ»: та же рабочая камера/жесты, что и в Sort the Words, но
+ * полностью другая сцена — степные идолы-балбалы вместо корзин, стрела
+ * с посланием вместо плитки, и отдельный, не похожий на остальные HUD. */
+function DesktopQuest({ onExerciseComplete }: Props) {
   const [cameraEnabled, setCameraEnabled] = useState(true);
   const hand = useMediaPipeHands(cameraEnabled);
-  const { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode } = useSharedHud(onExerciseComplete, initialSetId);
+  const { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode, questMastered } = useSharedHud(onExerciseComplete);
   const setCameraStatus = useSortWordsStore((s) => s.setCameraStatus);
   const swipeDebug = useSortWordsStore((s) => s.swipeDebug);
 
@@ -46,9 +51,9 @@ function DesktopExercise({ onExerciseComplete, initialSetId }: Props) {
   return (
     <>
       <div className="absolute inset-0">
-        <SortWordsScene hand={hand.status === 'tracking' || hand.status === 'no-hand' ? hand : null} />
+        <ZhelayakScene hand={hand.status === 'tracking' || hand.status === 'no-hand' ? hand : null} />
       </div>
-      <HUD
+      <ZhelayakHUD
         activeSet={ex.activeSet}
         score={ex.score}
         streak={ex.streak}
@@ -56,8 +61,8 @@ function DesktopExercise({ onExerciseComplete, initialSetId }: Props) {
         timeLimitMs={timeLimitMs}
         answered={ex.correctCount + ex.wrongCount}
         total={ex.totalWords}
-        masteredCount={ex.masteredCount}
-        totalSets={WORD_SETS.length}
+        masteredCount={questMastered}
+        totalSets={1}
         cameraStatus={hand.status}
         cameraError={hand.error}
         controlMode={controlMode}
@@ -78,12 +83,12 @@ function DesktopExercise({ onExerciseComplete, initialSetId }: Props) {
   );
 }
 
-function MobileExercise({ onExerciseComplete, initialSetId }: Props) {
-  const { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode } = useSharedHud(onExerciseComplete, initialSetId);
+function MobileQuest({ onExerciseComplete }: Props) {
+  const { ex, feedback, clearFeedback, controlMode, setControlMode, timeLimitMs, bestTimeMs, hardMode, setHardMode, questMastered } = useSharedHud(onExerciseComplete);
   return (
     <>
-      <MobileSortWords />
-      <HUD
+      <MobileZhelayak />
+      <ZhelayakHUD
         activeSet={ex.activeSet}
         score={ex.score}
         streak={ex.streak}
@@ -91,8 +96,8 @@ function MobileExercise({ onExerciseComplete, initialSetId }: Props) {
         timeLimitMs={timeLimitMs}
         answered={ex.correctCount + ex.wrongCount}
         total={ex.totalWords}
-        masteredCount={ex.masteredCount}
-        totalSets={WORD_SETS.length}
+        masteredCount={questMastered}
+        totalSets={1}
         cameraStatus="idle"
         cameraError={null}
         controlMode={controlMode}
@@ -111,21 +116,11 @@ function MobileExercise({ onExerciseComplete, initialSetId }: Props) {
   );
 }
 
-export function SortWordsExercise({ onExerciseComplete, initialSetId }: Props) {
+export function ZhelayakExercise({ onExerciseComplete }: Props) {
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      (window as unknown as { __sortWordsStore?: typeof useSortWordsStore }).__sortWordsStore = useSortWordsStore;
-    }
-  }, []);
-
   if (isMobile === null) {
-    return <div className="absolute inset-0 flex items-center justify-center text-white/40 text-sm">Loading…</div>;
+    return <div className="absolute inset-0 flex items-center justify-center text-[#d8c7a1]/50 text-sm">Жүктелуде…</div>;
   }
-  return isMobile ? (
-    <MobileExercise onExerciseComplete={onExerciseComplete} initialSetId={initialSetId} />
-  ) : (
-    <DesktopExercise onExerciseComplete={onExerciseComplete} initialSetId={initialSetId} />
-  );
+  return isMobile ? <MobileQuest onExerciseComplete={onExerciseComplete} /> : <DesktopQuest onExerciseComplete={onExerciseComplete} />;
 }

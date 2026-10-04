@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ElementType = 'water' | 'fire' | 'earth' | 'wind' | 'air' | null;
+export type ElementType = 'water' | 'fire' | 'earth' | 'wind' | 'air' | 'tausogar' | null;
 
 interface ElementState {
   activeElement: ElementType;
