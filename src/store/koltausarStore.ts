@@ -10,9 +10,9 @@ export interface KoltausarOption {
 
 /** Три кнопки-ответа — всегда в одном порядке, меняется только утверждение сверху */
 export const KOLTAUSAR_OPTIONS: readonly [KoltausarOption, KoltausarOption, KoltausarOption] = [
-  { id: 'koltausar', label: 'Қолтаусар туралы' },
-  { id: 'other-hero', label: 'Басқа батыр' },
-  { id: 'fiction', label: 'Жалған' },
+  { id: 'noun', label: 'Зат есім' },
+  { id: 'verb', label: 'Етістік' },
+  { id: 'adjective', label: 'Сын есім' },
 ];
 
 export interface KoltausarResult {

@@ -10,9 +10,9 @@ export interface TausogarOption {
 
 /** Три кнопки-ответа choice-заданий — всегда в одном порядке */
 export const TAUSOGAR_OPTIONS: readonly [TausogarOption, TausogarOption, TausogarOption] = [
-  { id: 'tausogar', label: 'Таусоғар туралы' },
-  { id: 'other-hero', label: 'Басқа батыр' },
-  { id: 'fiction', label: 'Жалған' },
+  { id: 'declarative', label: 'Хабарлы сөйлем' },
+  { id: 'interrogative', label: 'Сұраулы сөйлем' },
+  { id: 'exclamatory', label: 'Лепті сөйлем' },
 ];
 
 export interface TausogarResult {

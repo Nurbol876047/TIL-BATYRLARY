@@ -10,9 +10,9 @@ export interface SakkulakOption {
 
 /** Три кнопки-ответа — всегда в одном порядке, меняется только утверждение сверху */
 export const SAKKULAK_OPTIONS: readonly [SakkulakOption, SakkulakOption, SakkulakOption] = [
-  { id: 'sakkulak', label: 'Саққұлақ туралы' },
-  { id: 'other-hero', label: 'Басқа батыр' },
-  { id: 'fiction', label: 'Жалған' },
+  { id: 'present', label: 'Осы шақ' },
+  { id: 'past', label: 'Өткен шақ' },
+  { id: 'future', label: 'Келер шақ' },
 ];
 
 export interface SakkulakResult {

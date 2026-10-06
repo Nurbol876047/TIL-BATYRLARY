@@ -1,40 +1,40 @@
 /**
- * Банк вопросов квеста «Саққұлақ» (сказка «Ер-Төстік») — батыр с невероятным
- * слухом. Формат тот же, что в квестах Желаяка и Қолтаусара: утверждение +
- * куда оно относится — к самому батыру, к другому батыру той же сказки
- * (тот же мотив «невероятная способность», но не он) или выдумка.
+ * Банк вопросов квеста «Саққұлақ» — етістіктің шағы (10 сынып «Қазақ тілі»).
+ * Үш себет — осы шақ (-ады/-еді), өткен шақ (-ды/-ді), келер шақ (-ар/-ер).
+ * Мазмұны Саққұлақ (есту қабілеті) тақырыбымен байланысты, бірақ
+ * тексерілетіні — етістіктің шақ жұрнағы.
  */
 
-export type SakkulakCategory = 'sakkulak' | 'other-hero' | 'fiction';
+export type SakkulakCategory = 'present' | 'past' | 'future';
 
 export interface SakkulakItem {
   text: string;
   category: SakkulakCategory;
-  /** Перевод на английский — подсказка при ошибке */
+  /** Қате жауап бергенде көрсетілетін түсіндірме */
   hint: string;
 }
 
 export const SAKKULAK_ITEMS: readonly SakkulakItem[] = [
-  // Про самого Саққұлақа
-  { text: 'Ол жер астындағы дыбысты да естіп қояды.', category: 'sakkulak', hint: 'He can even hear sounds coming from underground.' },
-  { text: 'Ол алыстағы дұшпанның аяқ дыбысын бірден таниды.', category: 'sakkulak', hint: 'He instantly recognizes a distant enemy\'s footsteps.' },
-  { text: 'Ол Ер-Төстікке қауіпті алдын ала естіртіп отырады.', category: 'sakkulak', hint: 'He warns Er-Tostik of danger by hearing it first.' },
-  { text: 'Құлағын жерге төссе, арғы беттегі дыбысты да ажыратады.', category: 'sakkulak', hint: 'Pressed to the ground, his ear picks out sound from the far side of the earth.' },
-  { text: 'Оның құлағы жүздеген шақырымдағы дыбысты шалады.', category: 'sakkulak', hint: 'His ears catch sound from hundreds of kilometers away.' },
+  // Осы шақ: -ады/-еді/-йды
+  { text: 'Саққұлақ жер астындағы дыбысты да естиді.', category: 'present', hint: '«Естиді» — осы шақтың -иді жұрнағы (ест-и-ді), үнемі қайталанатын қасиетті білдіреді.' },
+  { text: 'Ол дұшпанның қадамын дереу таниды.', category: 'present', hint: '«Таниды» — тан-и-ды, осы/ауыспалы осы шақ жұрнағы.' },
+  { text: 'Құлағы жүз шақырымдағы дыбысты шалады.', category: 'present', hint: '«Шалады» — шал-а-ды, осы шақ формасы.' },
+  { text: 'Ол қауіпті алдын ала сезеді.', category: 'present', hint: '«Сезеді» — сез-е-ді, осы шақ жұрнағы.' },
+  { text: 'Саққұлақ серіктерін дереу хабардар етеді.', category: 'present', hint: '«Етеді» — ет-е-ді, осы шақ формасы.' },
 
-  // Про других героев той же сказки — тот же мотив «невероятная способность», без имён
-  { text: 'Ол бір отырғанда үйілген тасты түгел жеп қояды.', category: 'other-hero', hint: 'In one sitting he eats a whole heap of stones — a different companion.' },
-  { text: 'Ол аттың ізінен қалмай, желдей жүгіреді.', category: 'other-hero', hint: 'He runs like the wind, never falling behind a horse — a different companion.' },
-  { text: 'Ол бір тыныста тұтас көлді құрғатып тастайды.', category: 'other-hero', hint: 'He drains a whole lake in one breath — a different companion.' },
-  { text: 'Ол жеті жыл қатарынан ұйықтап, ешкім оны оята алмайды.', category: 'other-hero', hint: 'He sleeps seven years straight and no one can wake him — a different hero.' },
-  { text: 'Ол жауынгердің семсерін бір қолымен майыстырып сындырады.', category: 'other-hero', hint: 'He bends and snaps a warrior\'s sword with one hand — a different hero.' },
+  // Өткен шақ: -ды/-ді/-ты/-ті (жедел өткен шақ)
+  { text: 'Саққұлақ түнде алыстан аттың дүбірін естіді.', category: 'past', hint: '«Естіді» — жедел өткен шақтың -ді жұрнағы, бұрын болған іс-қимылды білдіреді.' },
+  { text: 'Ол жердің астынан келген дыбысты бірден таныды.', category: 'past', hint: '«Таныды» — тан-ы-ды, өткен шақ жұрнағы.' },
+  { text: 'Дұшпан жақындағанда, Саққұлақ оны алдын ала байқады.', category: 'past', hint: '«Байқады» — өткен шақтың -ды жұрнағы.' },
+  { text: 'Ол Ер-Төстікке қауіпті уақытында жеткізді.', category: 'past', hint: '«Жеткізді» — жедел өткен шақ формасы.' },
+  { text: 'Саққұлақ тыныштықта да елең ете қалды.', category: 'past', hint: '«Елең ете қалды» — өткен шақ, болған оқиғаны білдіреді.' },
 
-  // Выдумки — правдоподобные на слух, но не из сказки
-  { text: 'Ол тыныштықта өз жүрегінің соғысын естімейді.', category: 'fiction', hint: 'He can\'t even hear his own heartbeat in silence — not true, that contradicts his whole gift.' },
-  { text: 'Ол құлағымен көрмейтін затты да көреді.', category: 'fiction', hint: 'He can "see" invisible objects with his ears — invented, that is a different sense.' },
-  { text: 'Ол дыбыс шығармай-ақ адамның ойын оқиды.', category: 'fiction', hint: 'He reads minds without any sound — invented, that is mind-reading, not hearing.' },
-  { text: 'Құлағын жауып алса, бәрін бұрынғыдан да жақсы естиді.', category: 'fiction', hint: 'Covering his ears makes him hear even better — invented nonsense.' },
-  { text: 'Ол тек түнде ғана естиді, күндіз мүлде естімейді.', category: 'fiction', hint: 'He can only hear at night, never during the day — invented restriction.' },
+  // Келер шақ: -ар/-ер/-р (болжалды келер шақ)
+  { text: 'Саққұлақ ертең де қауіпті бірінші болып сезер.', category: 'future', hint: '«Сезер» — болжалды келер шақтың -ер жұрнағы.' },
+  { text: 'Ол алыстан келе жатқан дыбысты бірден таныр.', category: 'future', hint: '«Таныр» — тан-ыр, болжалды келер шақ формасы.' },
+  { text: 'Дұшпан жақындаса, Саққұлақ оны лезде аңғарар.', category: 'future', hint: '«Аңғарар» — келер шақтың -ар жұрнағы.' },
+  { text: 'Ол серіктерін уақытында хабардар етер.', category: 'future', hint: '«Етер» — ет-ер, болжалды келер шақ.' },
+  { text: 'Құлағы қанша алыс болса да дыбысты шалар.', category: 'future', hint: '«Шалар» — шал-ар, келер шақ жұрнағы. Дәл осы жұрнақ «Таусоғар» есімінде де бар («тау соғар»).' },
 ];
 
 export function shuffleItems<T>(items: readonly T[]): T[] {

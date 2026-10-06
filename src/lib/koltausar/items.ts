@@ -1,43 +1,40 @@
 /**
- * Банк вопросов квеста «Қолтаусар» (сказка «Ер-Төстік»). Формат тот же,
- * что доказал себя в квесте Желаяка: утверждение + куда оно относится —
- * к самому батыру, к другому батыру той же сказки (похоже, но не он) или
- * выдумка. Три варианта ответа всегда одни и те же — игрок нажимает
- * рукой (щипок над кнопкой) или мышью/тачем на правильный.
+ * Банк вопросов квеста «Қолтаусар» — сөз таптары (10 сынып «Қазақ тілі»).
+ * Үш себет — зат есім, етістік, сын есім. Лексика Қолтаусар тақырыбымен
+ * (су, сапар) байланысты, бірақ тексерілетіні — сөздің қай сөз табына
+ * жататыны.
  */
 
-export type KoltausarCategory = 'koltausar' | 'other-hero' | 'fiction';
+export type KoltausarCategory = 'noun' | 'verb' | 'adjective';
 
 export interface KoltausarItem {
   text: string;
   category: KoltausarCategory;
-  /** Перевод на английский — подсказка при ошибке */
+  /** Қате жауап бергенде көрсетілетін түсіндірме */
   hint: string;
 }
 
 export const KOLTAUSAR_ITEMS: readonly KoltausarItem[] = [
-  // Про самого Қолтаусара — без прямого повтора «су/көл» в каждой фразе,
-  // через образ и сюжетную роль, а не в лоб
-  { text: 'Ол бір тыныста тұтас көлді құрғатып тастайды.', category: 'koltausar', hint: 'He drains a whole lake in one breath.' },
-  { text: 'Хан қойған сайыста ол қарсыласын судың бәрін ішіп жеңеді.', category: 'koltausar', hint: 'In the khan\'s contest, he beats his rival by drinking up all the water.' },
-  { text: 'Оның шөлі қанша ішсе де басылмайды.', category: 'koltausar', hint: 'No matter how much he drinks, his thirst never ends.' },
-  { text: 'Ол сапарда Ер-Төстіктің серігі болады.', category: 'koltausar', hint: 'He becomes Er-Tostik\'s companion on the journey.' },
-  { text: 'Ол судың сарқырамасындай ағызып жұтады.', category: 'koltausar', hint: 'He gulps it down like a rushing waterfall.' },
+  // Зат есім — «не?» сұрағына жауап береді, затты/құбылысты атайды
+  { text: 'көл', category: 'noun', hint: '«Көл» — затты білдіреді, «не?» сұрағына жауап береді — зат есім.' },
+  { text: 'шөл', category: 'noun', hint: '«Шөл» — күй-жайды атайтын зат есім, «не?» сұрағына жауап береді.' },
+  { text: 'сапар', category: 'noun', hint: '«Сапар» — оқиғаны/әрекет атауын білдіретін зат есім.' },
+  { text: 'құдық', category: 'noun', hint: '«Құдық» — нақты затты атайды, «не?» сұрағына жауап береді — зат есім.' },
+  { text: 'дария', category: 'noun', hint: '«Дария» — табиғат объектісінің атауы, зат есім.' },
 
-  // Про других героев той же сказки/эпоса — тот же мотив («поглощает
-  // немыслимое количество»), но имя не называется нигде
-  { text: 'Ол бір отырғанда үйілген тасты түгел жеп қояды.', category: 'other-hero', hint: 'In one sitting, he eats up a whole heap of stones — a different companion.' },
-  { text: 'Ол аттың ізінен қалмай, желдей жүгіреді.', category: 'other-hero', hint: 'He runs like the wind, never falling behind a horse — a different companion.' },
-  { text: 'Ол жалғыз өзі айдаһарды жеңеді.', category: 'other-hero', hint: 'He alone defeats the dragon — that is Er-Tostik himself, not Koltausar.' },
-  { text: 'Ол жеті жыл қатарынан ұйықтап, ешкім оны оята алмайды.', category: 'other-hero', hint: 'He sleeps seven years straight and no one can wake him — a different hero.' },
-  { text: 'Ол жауынгердің семсерін бір қолымен майыстырып сындырады.', category: 'other-hero', hint: 'He bends and snaps a warrior\'s sword with one hand — a different hero\'s strength.' },
+  // Етістік — «не істеу?» сұрағына жауап береді, іс-қимылды білдіреді
+  { text: 'ішу', category: 'verb', hint: '«Ішу» — іс-қимылды білдіреді, «не істеу?» сұрағына жауап береді — етістік.' },
+  { text: 'құю', category: 'verb', hint: '«Құю» — қимыл-әрекет атауы, етістік.' },
+  { text: 'ағу', category: 'verb', hint: '«Ағу» — судың қимылын білдіреді, «не істеу?» сұрағына жауап береді.' },
+  { text: 'жұту', category: 'verb', hint: '«Жұту» — іс-қимылды атайтын етістік.' },
+  { text: 'суару', category: 'verb', hint: '«Суару» — біреуге/бірдеңеге бағытталған қимыл, етістік.' },
 
-  // Выдумки — правдоподобные на первый взгляд, но не из сказки
-  { text: 'Ол судың орнына отты ішіп, жалынды сөндіреді.', category: 'fiction', hint: 'He drinks fire instead of water to put out flames — not true, his gift is water.' },
-  { text: 'Әр жұтқан сайын ол тау құмын бойына сіңіріп алады.', category: 'fiction', hint: 'With every gulp he absorbs a mountain of sand — invented, not in the tale.' },
-  { text: 'Ол құрғақшылық кезінде аспаннан жаңбыр шақырады.', category: 'fiction', hint: 'He summons rain from the sky during drought — not his trait, that is weather magic.' },
-  { text: 'Ол судан шыққан сайын алып батырға айналады.', category: 'fiction', hint: 'Each time he steps out of the water he turns into a giant warrior — invented.' },
-  { text: 'Ол ішкен суын қайта мұзға айналдырып шығарады.', category: 'fiction', hint: 'He turns the water he drinks back into ice — not part of the tale.' },
+  // Сын есім — «қандай?» сұрағына жауап береді, заттың сынын білдіреді
+  { text: 'мол', category: 'adjective', hint: '«Мол» — заттың мөлшерін сипаттайды, «қандай?» сұрағына жауап береді — сын есім.' },
+  { text: 'терең', category: 'adjective', hint: '«Терең» — көлдің сынын білдіреді, сын есім.' },
+  { text: 'мөлдір', category: 'adjective', hint: '«Мөлдір» — судың сапасын сипаттайтын сын есім.' },
+  { text: 'суық', category: 'adjective', hint: '«Суық» — заттың сапалық белгісі, «қандай?» сұрағына жауап береді.' },
+  { text: 'кең', category: 'adjective', hint: '«Кең» — даланың/көлдің сынын білдіретін сын есім.' },
 ];
 
 export function shuffleItems<T>(items: readonly T[]): T[] {

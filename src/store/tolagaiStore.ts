@@ -10,9 +10,9 @@ export interface TolagaiOption {
 
 /** Три кнопки-ответа — всегда в одном порядке, меняется только утверждение сверху */
 export const TOLAGAI_OPTIONS: readonly [TolagaiOption, TolagaiOption, TolagaiOption] = [
-  { id: 'tolagai', label: 'Толағай туралы' },
-  { id: 'other-hero', label: 'Басқа батыр' },
-  { id: 'fiction', label: 'Жалған' },
+  { id: 'genitive', label: 'Ілік септік' },
+  { id: 'dative', label: 'Барыс септік' },
+  { id: 'accusative', label: 'Табыс септік' },
 ];
 
 export interface TolagaiResult {
