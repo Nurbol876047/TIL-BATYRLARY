@@ -7,6 +7,7 @@ import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { useSortWordsStore, WAIT_POINT, type ActiveWord } from '@/store/sortWordsStore';
 import { ZHELAYAK_THEME } from './theme';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   word: ActiveWord;
@@ -202,6 +203,7 @@ export function FlyingArrow3D({ word }: Props) {
           <meshStandardMaterial ref={flagMat} color={C_FLAG} roughness={0.5} metalness={0.1} />
         </RoundedBox>
         <Text
+          font={KAZAKH_FONT}
           position={[0, 0, 0.05]}
           fontSize={0.2}
           lineHeight={1.15}

@@ -6,6 +6,7 @@ import { Text } from '@react-three/drei';
 import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { BASKET_HEX, useSortWordsStore, type Basket } from '@/store/sortWordsStore';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   basket: Basket;
@@ -97,11 +98,11 @@ export function Basket3D({ basket }: Props) {
         </Select>
       </group>
 
-      <Text position={[0, 0.55, 0]} fontSize={0.34} color={hex} anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#0b0e14">
+      <Text font={KAZAKH_FONT} position={[0, 0.55, 0]} fontSize={0.34} color={hex} anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#0b0e14">
         {basket.label}
       </Text>
       {/* счётчик — на передней стенке, чтобы не уходить за нижний край экрана */}
-      <Text position={[0, -0.45, RADIUS * 0.95]} fontSize={0.26} color="#e2e8f0" anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#0b0e14">
+      <Text font={KAZAKH_FONT} position={[0, -0.45, RADIUS * 0.95]} fontSize={0.26} color="#e2e8f0" anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#0b0e14">
         {String(basket.count)}
       </Text>
     </group>

@@ -6,6 +6,7 @@ import { RoundedBox, Text } from '@react-three/drei';
 import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { useWordOrderStore, type WordTile } from '@/store/wordOrderStore';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   tile: WordTile;
@@ -128,6 +129,7 @@ export function WordTile3D({ tile }: Props) {
         </RoundedBox>
       </Select>
       <Text
+        font={KAZAKH_FONT}
         position={[0, 0, TILE_D / 2 + 0.01]}
         fontSize={0.25}
         color="#f1f5f9"

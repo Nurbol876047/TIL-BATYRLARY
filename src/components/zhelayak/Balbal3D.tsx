@@ -7,6 +7,7 @@ import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { useSortWordsStore, type Basket } from '@/store/sortWordsStore';
 import { ZHELAYAK_THEME } from './theme';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   basket: Basket;
@@ -104,10 +105,10 @@ export function Balbal3D({ basket }: Props) {
         <pointLight ref={gemLight} position={[0, -0.15, 0.45]} color={accent} intensity={1.1} distance={2.6} />
       </group>
 
-      <Text position={[0, 0.65, 0]} fontSize={0.28} color={theme.accent} anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#140d08">
+      <Text font={KAZAKH_FONT} position={[0, 0.65, 0]} fontSize={0.28} color={theme.accent} anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#140d08">
         {basket.label}
       </Text>
-      <Text position={[0, -1.55, 0.3]} fontSize={0.22} color="#f1e7d6" anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#140d08">
+      <Text font={KAZAKH_FONT} position={[0, -1.55, 0.3]} fontSize={0.22} color="#f1e7d6" anchorX="center" anchorY="middle" outlineWidth={0.01} outlineColor="#140d08">
         {String(basket.count)}
       </Text>
     </group>

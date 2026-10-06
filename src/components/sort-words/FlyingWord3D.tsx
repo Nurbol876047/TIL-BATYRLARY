@@ -6,6 +6,7 @@ import { RoundedBox, Text } from '@react-three/drei';
 import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { BASKET_HEX, useSortWordsStore, WAIT_POINT, type ActiveWord } from '@/store/sortWordsStore';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   word: ActiveWord;
@@ -156,7 +157,7 @@ export function FlyingWord3D({ word }: Props) {
           <meshStandardMaterial ref={mat} color={C_BASE} emissive={glowColor ?? '#000000'} roughness={0.35} metalness={0.4} />
         </RoundedBox>
       </Select>
-      <Text position={[0, 0, TILE_D / 2 + 0.01]} fontSize={0.3} color="#f1f5f9" anchorX="center" anchorY="middle" outlineWidth={0.008} outlineColor="#0b0e14">
+      <Text font={KAZAKH_FONT} position={[0, 0, TILE_D / 2 + 0.01]} fontSize={0.3} color="#f1f5f9" anchorX="center" anchorY="middle" outlineWidth={0.008} outlineColor="#0b0e14">
         {word.text}
       </Text>
     </group>

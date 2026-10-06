@@ -6,6 +6,7 @@ import { Text } from '@react-three/drei';
 import { Select } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { useWordOrderStore, type Slot } from '@/store/wordOrderStore';
+import { KAZAKH_FONT } from '@/lib/fonts';
 
 interface Props {
   slot: Slot;
@@ -59,7 +60,7 @@ export function SlotZone3D({ slot, spacing }: Props) {
         </lineSegments>
       </Select>
       {!filled && (
-        <Text position={[0, 0, 0.02]} fontSize={0.22} color="#475569" anchorX="center" anchorY="middle">
+        <Text font={KAZAKH_FONT} position={[0, 0, 0.02]} fontSize={0.22} color="#475569" anchorX="center" anchorY="middle">
           {String(slot.index + 1)}
         </Text>
       )}
